@@ -1,0 +1,3 @@
+C:/Users/ahuma/Desktop/litec/build/CMakeFiles/litec.dir
+C:/Users/ahuma/Desktop/litec/build/CMakeFiles/edit_cache.dir
+C:/Users/ahuma/Desktop/litec/build/CMakeFiles/rebuild_cache.dir
