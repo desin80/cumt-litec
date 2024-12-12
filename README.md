@@ -4,25 +4,6 @@
 
 一个 C 语言的简易词法分析器
 
-#### 编译
-
-```
-./build.bat
-```
-
-#### 使用示例
-
-```
-./build/litec.exe ./test.c
-```
-
-#### 错误测试
-
-```
-./build.bat
-./run_error_tests.bat
-```
-
 # 实现的功能
 
 ## 1. 关键字识别
