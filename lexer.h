@@ -104,6 +104,9 @@ struct Token {
     int line;
     int column;
 
+    // 添加默认构造函数
+    Token() : type(TokenType::ERROR), lexeme(""), line(0), column(0) {}
+    
     Token(TokenType t, const std::string &l, int ln, int col)
         : type(t), lexeme(l), line(ln), column(col) {}
 };

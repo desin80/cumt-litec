@@ -80,12 +80,12 @@ clean: CMakeFiles/litec.dir/clean
 CMakeFiles/litec.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\litec.dir\build.make CMakeFiles/litec.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\litec.dir\build.make CMakeFiles/litec.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\ahuma\Desktop\litec\build\CMakeFiles --progress-num=1,2,3 "Built target litec"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\ahuma\Desktop\litec\build\CMakeFiles --progress-num=1,2,3,4 "Built target litec"
 .PHONY : CMakeFiles/litec.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/litec.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ahuma\Desktop\litec\build\CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ahuma\Desktop\litec\build\CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/litec.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ahuma\Desktop\litec\build\CMakeFiles 0
 .PHONY : CMakeFiles/litec.dir/rule

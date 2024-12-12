@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/litec.dir/lexer.cpp.obj.d"
   "CMakeFiles/litec.dir/main.cpp.obj"
   "CMakeFiles/litec.dir/main.cpp.obj.d"
+  "CMakeFiles/litec.dir/parser.cpp.obj"
+  "CMakeFiles/litec.dir/parser.cpp.obj.d"
   "liblitec.dll.a"
   "litec.exe"
   "litec.exe.manifest"

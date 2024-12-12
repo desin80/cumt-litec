@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(litec
     main.cpp
     lexer.cpp
+    parser.cpp
 )
 
 # 设置输出目录

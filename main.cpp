@@ -1,4 +1,5 @@
 #include "lexer.h"
+#include "parser.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -29,7 +30,7 @@ void enableWindowsConsoleColor() {
 #endif
 }
 
-std::string readFile(const std::string& path) {
+std::string readFile(const char* path) {
     std::ifstream file(path);
     std::stringstream buffer;
     buffer << file.rdbuf();
@@ -45,15 +46,15 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // 保存源代码的每一行，用于错误显示
-    std::vector<std::string> sourceLines;
-    
     try {
         std::string source = readFile(argv[1]);
         
-        // 读取源代码的每一行
+        // 保存源代码的每一行，用于错误显示
+        std::vector<std::string> sourceLines;
         std::istringstream sourceStream(source);
         std::string line;
+        
+        // 读取并存储每一行
         while (std::getline(sourceStream, line)) {
             sourceLines.push_back(line);
         }
@@ -65,54 +66,23 @@ int main(int argc, char* argv[]) {
                      << Color::RESET << sourceLines[i] << std::endl;
         }
         
-        Lexer lexer(source);
+        // 创建解析器并解析
+        Parser parser(source);
+        std::unique_ptr<BlockStmt> ast = parser.parse();
         
-        // 获取并打印所有token
-        std::cout << Color::BLUE << "\nTokens:\n" << Color::RESET;
-        lexer.getAllTokens();
-        lexer.printTokens();
-        
-    } catch (const std::runtime_error& e) {
-        std::string errorMsg = e.what();
-        size_t linePos = errorMsg.find("line ");
-        size_t columnPos = errorMsg.find("column ");
-        
-        if (linePos != std::string::npos && columnPos != std::string::npos) {
-            // 提取行号和列号
-            size_t lineNumStart = linePos + 5;
-            size_t lineNumEnd = errorMsg.find(",", lineNumStart);
-            size_t columnNumStart = columnPos + 7;
-            size_t columnNumEnd = errorMsg.find_first_of(" \n", columnNumStart);
-            
-            int errorLine = std::stoi(errorMsg.substr(lineNumStart, lineNumEnd - lineNumStart));
-            int errorColumn = std::stoi(errorMsg.substr(columnNumStart, columnNumEnd - columnNumStart));
-            
-            // 打印错误信息
-            std::cerr << Color::RED << "\n[LEXICAL ERROR] " << errorMsg << Color::RESET << std::endl;
-            
-            // 打印出错的代码行及其上下文
-            if (errorLine > 1 && errorLine - 2 < sourceLines.size()) {
-                std::cout << Color::GREEN << std::setw(4) << (errorLine - 1) << " | " 
-                         << Color::RESET << sourceLines[errorLine - 2] << std::endl;
-            }
-            
-            if (errorLine - 1 < sourceLines.size()) {
-                std::cout << Color::GREEN << std::setw(4) << errorLine << " | " 
-                         << Color::RESET << sourceLines[errorLine - 1] << std::endl;
-                
-                // 打印错误位置指示器
-                std::cout << "     | " << std::string(errorColumn - 1, ' ') 
-                         << Color::RED << "^" << Color::RESET << std::endl;
-            }
-            
-            if (errorLine < sourceLines.size()) {
-                std::cout << Color::GREEN << std::setw(4) << (errorLine + 1) << " | " 
-                         << Color::RESET << sourceLines[errorLine] << std::endl;
-            }
+        if (ast) {
+            std::cout << Color::GREEN << "\nParsing successful!" << Color::RESET << std::endl;
+            std::cout << Color::BLUE << "\nAbstract Syntax Tree:\n" << Color::RESET;
+            ast->print();
         } else {
-            // 如果无法解析行号和列号，直接打印错误信息
-            std::cerr << Color::RED << "\n[LEXICAL ERROR] " << errorMsg << Color::RESET << std::endl;
+            std::cout << Color::RED << "\nParsing failed." << Color::RESET << std::endl;
         }
+        
+    } catch (const ParseError& e) {
+        std::cerr << Color::RED << "\n[PARSE ERROR] " << e.what() << Color::RESET << std::endl;
+        return 1;
+    } catch (const std::exception& e) {
+        std::cerr << Color::RED << "\n[ERROR] " << e.what() << Color::RESET << std::endl;
         return 1;
     }
 

@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/ahuma/Desktop/litec/lexer.cpp" "CMakeFiles/litec.dir/lexer.cpp.obj" "gcc" "CMakeFiles/litec.dir/lexer.cpp.obj.d"
   "C:/Users/ahuma/Desktop/litec/main.cpp" "CMakeFiles/litec.dir/main.cpp.obj" "gcc" "CMakeFiles/litec.dir/main.cpp.obj.d"
+  "C:/Users/ahuma/Desktop/litec/parser.cpp" "CMakeFiles/litec.dir/parser.cpp.obj" "gcc" "CMakeFiles/litec.dir/parser.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
